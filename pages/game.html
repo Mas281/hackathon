@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <title>Hackathon</title>
+
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="../styles/game.css">
+  <script src="../scripts/script.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <video class="input_video"></video>
+
+    <h1>handy mafs</h1>
+
+    <div class="topbar">
+      <div class="topbarLeft">
+        <p id="questionNo">question 1/5</p>
+        <p id="score">score: 100</p>
+      </div>
+      <p id="question">5 + 3 x 4</p>
+      <!-- <p>question answer: </p> -->
+    </div>
+
+    <canvas class="output_canvas" width="640" height="360px"></canvas>
+
+    <p id="fingersUp">fingers up: </p>
+    <p id="lastSelected">last selected: </p>
+    <p id="selection">selection: </p>
+    <a href="/">home</a>
+    <button onclick="alert('bruv');">next</a>
+  </div>
+</body>
+</html>

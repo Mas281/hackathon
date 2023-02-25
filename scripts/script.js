@@ -6,6 +6,11 @@ let buildingNum = 0;
 const holdMillis = 1000;
 const resetMillis = 3000;
 
+let questionNo = 0;
+let score = 0;
+let question = "";
+let answer = -1;
+
 function fingersUpOnHand(points) {
     let fingersUp = 0;
 
@@ -42,7 +47,7 @@ function updateFingersUp(hands) {
     const x = Math.round(100 * wrist.x) / 100;
     const y = Math.round(100 * wrist.y) / 100;
     const z = wrist.z;
-    document.getElementById("pos").innerText = "x: " + x + " y: " + y + " z: " + z;
+    console.log("x: " + x + " y: " + y + " z: " + z);
 
     let fingersUp = 0;
     for (let hand of hands) {

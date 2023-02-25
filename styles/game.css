@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}
+
+.container {
+  border: 4px purple solid;
+}
+
+h1 {
+  font-size: 40px;
+  padding: 20px;
+  text-align: center;
+}
+
+.topbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 5px solid purple;
+  padding: 20px;
+}
+
+.topbarLeft {
+
+}
+
+#questionNo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#score {
+  font-size: 20px;
+  font-style: italic;
+}
+
+#question {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.output_canvas {
+  border: 5px solid purple;
+}
