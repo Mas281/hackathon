@@ -96,7 +96,7 @@ function checkUserInput() {
             generateQuestion();
             locked = false;
         }, 2000);
-    } else if (userInput > answer) {
+    } else if (userInput.toString().length >= answer.toString().length) {
         document.getElementById("feedback").style.color = "red";
         document.getElementById("feedback").innerText = "Incorrect :(";
 
