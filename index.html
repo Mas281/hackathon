@@ -10,6 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
 </head>
 
 <body>
@@ -18,93 +19,10 @@
 
     <h1 id="pos">pos</h1>
     <h1 id="fingersUp">fingers up: </h1>
+    <h1 id="lastSelected">last selected: </h1>
+    <h1 id="selection">selection: </h1>
 
-    <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+    <canvas class="output_canvas" width="819px" height="461px"></canvas>
   </div>
-
-  <script type="module">
-    function fingersUpOnHand(points) {
-        let fingersUp = 0;
-
-        // Thumb
-        const thumbTip = points[4];
-        const thumbJoint = points[3];
-        const thumbBase = points[2];
-        const pinkyBase = points[17];
-
-        if (thumbBase.x < pinkyBase.x && thumbTip.x < thumbJoint.x && thumbJoint.x < thumbBase.x)
-            ++fingersUp;
-        else if (thumbBase.x > pinkyBase.x && thumbTip.x > thumbJoint.x && thumbJoint.x > thumbBase.x)
-            ++fingersUp;
-
-        // Non-thumb fingers
-        for (let i = 8; i <= 20; i += 4) {
-            const up = points[i].y < points[i - 1].y &&
-                points[i - 1].y < points[i - 2].y &&
-                points[i - 2].y < points[i - 3].y;
-            if (up)
-                ++fingersUp;
-        }
-
-        return fingersUp;
-    }
-
-    function updateFingersUp(hands) {
-        const wrist = hands[0][0];
-        const x = Math.round(100 * wrist.x) / 100;
-        const y = Math.round(100 * wrist.y) / 100;
-        const z = wrist.z;
-        document.getElementById("pos").innerText = "x: " + x + " y: " + y + " z: " + z;
-
-        let fingersUp = 0;
-        for (let hand of hands) {
-            fingersUp += fingersUpOnHand(hand);
-        }
-
-        document.getElementById("fingersUp").innerText = "fingers up: " + fingersUp;
-    }
-
-    const videoElement = document.getElementsByClassName('input_video')[0];
-    const canvasElement = document.getElementsByClassName('output_canvas')[0];
-    const canvasCtx = canvasElement.getContext('2d');
-
-    function onResults(results) {
-        canvasCtx.save();
-        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-
-        canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
-        if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-            updateFingersUp(results.multiHandLandmarks);
-
-            for (const landmarks of results.multiHandLandmarks) {
-                drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
-                drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
-            }
-        }
-
-        canvasCtx.restore();
-    }
-
-    const hands = new Hands({locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
-    }});
-
-    hands.setOptions({
-        maxNumHands: 10,
-        modelComplexity: 1,
-        minDetectionConfidence: 0.5,
-        minTrackingConfidence: 0.5
-    });
-    hands.onResults(onResults);
-
-    const camera = new Camera(videoElement, {
-        onFrame: async () => {
-            await hands.send({image: videoElement});
-        },
-        width: 1280,
-        height: 720
-    });
-    camera.start();
-  </script>
 </body>
 </html>
