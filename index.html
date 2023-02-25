@@ -30,11 +30,11 @@
         const thumbTip = points[4];
         const thumbJoint = points[3];
         const thumbBase = points[2];
-        const indexBase = points[5];
+        const pinkyBase = points[17];
 
-        if (thumbBase.x < indexBase.x && thumbTip.x < thumbJoint.x && thumbJoint.x < thumbBase.x)
+        if (thumbBase.x < pinkyBase.x && thumbTip.x < thumbJoint.x && thumbJoint.x < thumbBase.x)
             ++fingersUp;
-        else if (thumbBase.x > indexBase.x && thumbTip.x > thumbJoint.x && thumbJoint.x > thumbBase.x)
+        else if (thumbBase.x > pinkyBase.x && thumbTip.x > thumbJoint.x && thumbJoint.x > thumbBase.x)
             ++fingersUp;
 
         // Non-thumb fingers
