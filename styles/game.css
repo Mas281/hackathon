@@ -1,10 +1,35 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
+  overflow: hidden;
 }
 
 .container {
   border: 4px purple solid;
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}
+
+#output_canvas {
+  display: block;
+  margin: 40px auto;
+  border: 5px solid purple;
+}
+
+#selection {
+  text-align: center;
+}
+
+#feedback {
+  text-align: center;
+}
+
+.dev {
+  visibility: hidden;
 }
 
 h1 {

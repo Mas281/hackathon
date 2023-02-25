@@ -1,15 +1,114 @@
+const DEV_MODE = false;
+
+let locked = false;
+
 let lastFingersUp = -1;
 let lastFingersUpTime = -1;
 
-let buildingNum = 0;
+let userInput = 0;
 
 const holdMillis = 1000;
 const resetMillis = 3000;
 
 let questionNo = 0;
-let score = 0;
 let question = "";
 let answer = -1;
+let score = 0;
+
+const maxQuestions = 5;
+
+function random(low, high) {
+    return Math.floor(low + Math.random() * (high - low + 1));
+}
+
+function speak(text) {
+    const speakData = new SpeechSynthesisUtterance();
+    speakData.volume = 1;
+    speakData.rate = 0.75;
+    speakData.pitch = 1;
+    speakData.text = text;
+    speakData.lang = "en";
+    speechSynthesis.speak(speakData);
+}
+
+function generateQuestion() {
+    ++questionNo;
+    document.getElementById("questionNo").innerText = "Question " + questionNo + "/" + maxQuestions;
+
+    let lhs;
+    let rhs;
+    let tts;
+
+    switch (random(1, 4)) {
+        case 1: // Addition
+            lhs = random(1, 99);
+            rhs = random(1, 100 - lhs);
+            question = lhs + " + " + rhs;
+            answer = lhs + rhs;
+            break;
+        case 2: // Subtraction
+            lhs = random(2, 99);
+            rhs = random(1, lhs - 1);
+            question = lhs + " − " + rhs;
+            tts = lhs + " minus " + rhs;
+            answer = lhs - rhs;
+            break;
+        case 3: // Multiplication
+            lhs = random(1, 50);
+            rhs = random(1, Math.floor(100 / lhs));
+            question = lhs + " × " + rhs;
+            answer = lhs * rhs;
+            break;
+        case 4: // Division
+            rhs = random(1, 10);
+            answer = random(1, 10);
+            lhs = rhs * answer;
+            question = lhs + " ÷ " + rhs;
+            answer = lhs / rhs;
+            break;
+    }
+
+    if (tts === undefined) {
+        tts = question;
+    }
+
+    document.getElementById("question").innerText = question;
+    speak(tts);
+}
+
+function checkUserInput() {
+    console.log("userinput: " + userInput, typeof(userInput));
+    console.log("answer: " + answer, typeof(answer));
+
+    if (userInput === answer) {
+        console.log("GOT CORRECT");
+        document.getElementById("feedback").style.color = "green";
+        document.getElementById("feedback").innerText = "Correct!";
+
+        ++score;
+        document.getElementById("score").innerText = "Score: " + score;
+
+        locked = true;
+        setTimeout(() => {
+            document.getElementById("feedback").innerText = "";
+            userInput = 0;
+            updateInputText();
+            generateQuestion();
+            locked = false;
+        }, 2000);
+    } else if (userInput > answer) {
+        document.getElementById("feedback").style.color = "red";
+        document.getElementById("feedback").innerText = "Incorrect :(";
+
+        locked = true;
+        setTimeout(() => {
+            document.getElementById("feedback").innerText = "";
+            userInput = 0;
+            updateInputText();
+            locked = false;
+        }, 2000);
+    }
+}
 
 function fingersUpOnHand(points) {
     let fingersUp = 0;
@@ -37,17 +136,16 @@ function fingersUpOnHand(points) {
     return fingersUp;
 }
 
+function updateInputText() {
+    document.getElementById("selection").innerText = "Your input: " + userInput;
+}
+
 function updateFingersUp(hands) {
     const wrist = hands[0][0];
     const middleTip = hands[0][12];
 
     if (wrist.y < middleTip.y)
         return;
-
-    const x = Math.round(100 * wrist.x) / 100;
-    const y = Math.round(100 * wrist.y) / 100;
-    const z = wrist.z;
-    console.log("x: " + x + " y: " + y + " z: " + z);
 
     let fingersUp = 0;
     for (let hand of hands) {
@@ -57,15 +155,17 @@ function updateFingersUp(hands) {
     if (fingersUp === lastFingersUp) {
         const elapsed = Date.now() - lastFingersUpTime;
         if (fingersUp === 10 && elapsed >= resetMillis) {
-            buildingNum = 0;
+            userInput = 0;
             lastFingersUp = -1;
             lastFingersUpTime = Date.now();
         } else if (fingersUp !== 10 && elapsed >= holdMillis) {
             document.getElementById("lastSelected").innerText = "last selected: " + fingersUp;
             lastFingersUpTime = Date.now();
-            buildingNum = 10 * buildingNum + fingersUp;
+            userInput = 10 * userInput + fingersUp;
         }
-        document.getElementById("selection").innerText = "selection: " + buildingNum;
+
+        updateInputText();
+        checkUserInput();
     } else {
         lastFingersUp = fingersUp;
         lastFingersUpTime = Date.now();
@@ -75,24 +175,33 @@ function updateFingersUp(hands) {
 }
 
 let videoElement;
-// let canvasElement;
-// let canvasCtx;
+let canvasElement;
+let canvasCtx;
 
 function onResults(results) {
-    // canvasCtx.save();
-    // canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
 
-    // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+    // canvasCtx.scale(-1, 1);
+    // canvasCtx.drawImage(results.image, -image.width, 0);
+    // canvasCtx.setTransform(1, 0, 0, 1, 0, 0);
+
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-        updateFingersUp(results.multiHandLandmarks);
+        if (!locked) {
+            updateFingersUp(results.multiHandLandmarks);
+        }
 
-        // for (const landmarks of results.multiHandLandmarks) {
-        //     drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
-        //     drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
-        // }
+        if (DEV_MODE) {
+            for (const landmarks of results.multiHandLandmarks) {
+                drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
+                drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
+            }
+        }
     }
 
-    // canvasCtx.restore();
+    canvasCtx.scale(-1, 1);
+    canvasCtx.restore();
 }
 
 const hands = new Hands({locateFile: (file) => {
@@ -108,7 +217,16 @@ hands.setOptions({
 hands.onResults(onResults);
 
 window.addEventListener("load", () => {
-    videoElement = document.getElementsByClassName('webcam')[0];
+    if (DEV_MODE) {
+        for (const element of document.getElementsByClassName("dev")) {
+            console.log("not in dev mode");
+            element.style.visibility = "visible";
+        }
+    }
+
+    videoElement = document.getElementById("webcam");
+    canvasElement = document.getElementById("output_canvas");
+    canvasCtx = canvasElement.getContext("2d");
 
     const camera = new Camera(videoElement, {
         onFrame: async () => {
@@ -118,5 +236,6 @@ window.addEventListener("load", () => {
         height: 720
     });
 
+    generateQuestion();
     camera.start();
 });
