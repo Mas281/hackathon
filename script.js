@@ -34,6 +34,11 @@ function fingersUpOnHand(points) {
 
 function updateFingersUp(hands) {
     const wrist = hands[0][0];
+    const middleTip = hands[0][12];
+
+    if (wrist.y < middleTip.y)
+        return;
+
     const x = Math.round(100 * wrist.x) / 100;
     const y = Math.round(100 * wrist.y) / 100;
     const z = wrist.z;
