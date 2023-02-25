@@ -75,24 +75,24 @@ function updateFingersUp(hands) {
 }
 
 let videoElement;
-let canvasElement;
-let canvasCtx;
+// let canvasElement;
+// let canvasCtx;
 
 function onResults(results) {
-    canvasCtx.save();
-    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    // canvasCtx.save();
+    // canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+    // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         updateFingersUp(results.multiHandLandmarks);
 
-        for (const landmarks of results.multiHandLandmarks) {
-            drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
-            drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
-        }
+        // for (const landmarks of results.multiHandLandmarks) {
+        //     drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
+        //     drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
+        // }
     }
 
-    canvasCtx.restore();
+    // canvasCtx.restore();
 }
 
 const hands = new Hands({locateFile: (file) => {
@@ -108,9 +108,7 @@ hands.setOptions({
 hands.onResults(onResults);
 
 window.addEventListener("load", () => {
-    videoElement = document.getElementsByClassName('input_video')[0];
-    canvasElement = document.getElementsByClassName('output_canvas')[0];
-    canvasCtx = canvasElement.getContext('2d');
+    videoElement = document.getElementsByClassName('webcam')[0];
 
     const camera = new Camera(videoElement, {
         onFrame: async () => {

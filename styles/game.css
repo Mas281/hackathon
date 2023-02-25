@@ -3,11 +3,6 @@
   padding: 0;
 }
 
-video {
-  position: absolute;
-  visibility: hidden;
-}
-
 .container {
   border: 4px purple solid;
 }
@@ -45,6 +40,10 @@ h1 {
   font-weight: bold;
 }
 
-.output_canvas {
+.webcam {
+  display: block;
+  width: 640px;
+  height: 360px;
+  margin: 40px auto;
   border: 5px solid purple;
 }
