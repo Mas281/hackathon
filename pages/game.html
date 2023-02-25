@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <title>Hackathon</title>
+
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="../styles/game.css">
+  <script src="../scripts/script.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Handy Mafs</h1>
+
+    <div class="topbar">
+      <div class="topbarLeft">
+        <p id="questionNo">Question 1/5</p>
+        <p id="score">Score: 0</p>
+      </div>
+      <p id="question"></p>
+    </div>
+
+    <video id="webcam"></video>
+    <canvas id="output_canvas" width="640" height="360px"></canvas>
+
+    <h1 id="selection">Your input: 0</h1>
+    <h2 id="feedback"></h2>
+
+    <p id="fingersUp" class="dev">fingers up: </p>
+    <p id="lastSelected" class="dev">last selected: </p>
+  </div>
+</body>
+</html>

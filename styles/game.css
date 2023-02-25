@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  border: 4px purple solid;
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}
+
+#output_canvas {
+  display: block;
+  margin: 40px auto;
+  border: 5px solid purple;
+}
+
+#selection {
+  text-align: center;
+}
+
+#feedback {
+  text-align: center;
+}
+
+.dev {
+  visibility: hidden;
+}
+
+h1 {
+  font-size: 40px;
+  padding: 20px;
+  text-align: center;
+}
+
+.topbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 5px solid purple;
+  padding: 20px;
+}
+
+.topbarLeft {
+
+}
+
+#questionNo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#score {
+  font-size: 20px;
+  font-style: italic;
+}
+
+#question {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.webcam {
+  display: block;
+  width: 640px;
+  height: 360px;
+  margin: 40px auto;
+  border: 5px solid purple;
+}
