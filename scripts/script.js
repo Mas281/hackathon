@@ -11,12 +11,13 @@ let userInput = 0;
 const holdMillis = 1000;
 const resetMillis = 1500;
 
-let questionNo = 0;
+// let questionNo = 0;
+// const maxQuestions = 5;
+
 let question = "";
 let answer = -1;
 let score = 0;
 
-const maxQuestions = 5;
 
 function random(low, high) {
     return Math.floor(low + Math.random() * (high - low + 1));
@@ -34,8 +35,8 @@ function speak(text) {
 }
 
 function generateQuestion() {
-    ++questionNo;
-    document.getElementById("questionNo").innerText = "Question " + questionNo + "/" + maxQuestions;
+    // ++questionNo;
+    // document.getElementById("questionNo").innerText = "Question " + questionNo + "/" + maxQuestions;
 
     let lhs;
     let rhs;
@@ -135,7 +136,7 @@ function fingersUpOnHand(points) {
 }
 
 function updateInputText() {
-    document.getElementById("selection").innerText = "Your input: " + userInput;
+    document.getElementById("answer").innerText = userInput;
 }
 
 function updateFingersUp(hands) {
