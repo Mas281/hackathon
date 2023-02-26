@@ -52,16 +52,16 @@ body {
 }
 
 .button-start {
-    width:-100px;
+    width:200px;
     margin: 0px auto;
     font-size: 40px;
 }
 
 form {
-    width: -10ppx;
+    width: 50vh;
     margin: 0px auto;
-    font-size: 80px;
-    font-weight: 500;
+    font-size: 60px;
+    font-weight: 300;
 }
 
 label {
