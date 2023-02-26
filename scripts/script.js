@@ -8,7 +8,7 @@ let lastFingersUpTime = -1;
 let userInput = 0;
 
 const holdMillis = 1000;
-const resetMillis = 3000;
+const resetMillis = 1000;
 
 let questionNo = 0;
 let question = "";
@@ -78,11 +78,7 @@ function generateQuestion() {
 }
 
 function checkUserInput() {
-    console.log("userinput: " + userInput, typeof(userInput));
-    console.log("answer: " + answer, typeof(answer));
-
     if (userInput === answer) {
-        console.log("GOT CORRECT");
         document.getElementById("feedback").style.color = "green";
         document.getElementById("feedback").innerText = "Correct!";
 
@@ -182,11 +178,11 @@ let canvasCtx;
 function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
 
-    // canvasCtx.scale(-1, 1);
-    // canvasCtx.drawImage(results.image, -image.width, 0);
-    // canvasCtx.setTransform(1, 0, 0, 1, 0, 0);
+    if (!DEV_MODE) {
+        canvasCtx.scale(-1, 1);
+    }
+    canvasCtx.drawImage(results.image, 0, 0, (DEV_MODE ? 1 : -1) * canvasElement.width, canvasElement.height);
 
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         if (!locked) {
@@ -199,9 +195,10 @@ function onResults(results) {
                 drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
             }
         }
+    } else {
+        lastFingersUp = -1;
     }
 
-    canvasCtx.scale(-1, 1);
     canvasCtx.restore();
 }
 
