@@ -24,20 +24,24 @@
         <div>
           <video id="webcam"></video>
           <canvas id="output_canvas" width="960px" height="540px"></canvas>
+          <p id="fingersUp" class="dev">fingers up: </p>
+          <p id="lastSelected" class="dev">last selected: </p>
         </div>
         <div class="col-right">
           <!-- <p id="questionNo">Question 1/5</p> -->
           <p id="score">Score: 0</p>
-          <div class="wrapper">
+          <div class="maths-box">
             <p id="question">5 + 3</p>
           </div>
-          <div class="wrapper">
+          <p class="equals-sign">=</p>
+          <div class="answer-box maths-box">
             <p id="answer">0</p>
           </div>
-          <p id="feedback"></p>
-          <a class="button" href="/">End</a>
-          <p id="fingersUp" class="dev">fingers up: </p>
-          <p id="lastSelected" class="dev">last selected: </p>
+          <div>
+            <img class="feedback" id="icon-correct" src="../assets/icon-correct.png" />
+            <img class="feedback" id="icon-incorrect" src="../assets/icon-incorrect.png" />
+          </div>
+          <a class="button" href="/">Finish</a>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 let locked = false;
 
@@ -81,27 +81,25 @@ function generateQuestion() {
 
 function checkUserInput() {
     if (userInput === answer) {
-        document.getElementById("feedback").style.color = "green";
-        document.getElementById("feedback").innerText = "Correct!";
+        document.getElementById("icon-correct").style.visibility = "visible";
 
         ++score;
         document.getElementById("score").innerText = "Score: " + score;
 
         locked = true;
         setTimeout(() => {
-            document.getElementById("feedback").innerText = "";
+            document.getElementById("icon-correct").style.visibility = "hidden";
             userInput = 0;
             updateInputText();
             generateQuestion();
             locked = false;
         }, 2000);
     } else if (userInput.toString().length >= answer.toString().length) {
-        document.getElementById("feedback").style.color = "red";
-        document.getElementById("feedback").innerText = "Incorrect :(";
+        document.getElementById("icon-incorrect").style.visibility = "visible";
 
         locked = true;
         setTimeout(() => {
-            document.getElementById("feedback").innerText = "";
+            document.getElementById("icon-incorrect").style.visibility = "hidden";
             userInput = 0;
             updateInputText();
             locked = false;

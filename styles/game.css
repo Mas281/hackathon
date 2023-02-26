@@ -15,6 +15,15 @@ a {
   text-decoration: none;
 }
 
+.feedback {
+  width: 100px;
+  height: 100px;
+}
+
+#icon-correct, #icon-incorrect {
+  visibility: hidden;
+}
+
 .button {
     display: block;
     background-color: #5792C9;
@@ -96,13 +105,22 @@ h1 {
   /* font-style: italic; */
 }
 
-.wrapper {
+.maths-box {
   padding: 30px;
   width: 300px;
   background-color: #F2F3ED;
   color: #365289;
   border-radius: 30px;
   text-align: center;
+}
+
+.answer-box {
+  background-color: #f0d850;
+  color: #6e4008;
+}
+
+.equals-sign {
+  font-size: 60px;
 }
 
 #question, #answer {

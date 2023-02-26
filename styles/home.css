@@ -39,16 +39,11 @@ body {
     padding: 16px 32px;
     text-align: center;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 500;
-    margin: 4px 2px;
+    margin: 30px auto;
     cursor: pointer;
     text-transform: uppercase;
-}
-
-.button-start {
-    margin: 0px auto;
-    font-size: 40px;
 }
 
 form {
