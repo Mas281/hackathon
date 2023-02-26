@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+table {
+    align-items: center;
+    justify-content: space-around;
+  }
+
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: #F2F3ED;
@@ -27,6 +32,7 @@ body {
     min-height: 100vh;
     background-color: #365289;
     text-align: center;
+
 }
 
 .button {
@@ -46,17 +52,16 @@ body {
 }
 
 .button-start {
-    width: 200px;
+    width:-100px;
     margin: 0px auto;
     font-size: 40px;
 }
 
 form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    padding: 20px;
+    width: -10ppx;
+    margin: 0px auto;
+    font-size: 80px;
+    font-weight: 500;
 }
 
 label {
