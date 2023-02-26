@@ -81,25 +81,25 @@ function generateQuestion() {
 
 function checkUserInput() {
     if (userInput === answer) {
-        document.getElementById("icon-correct").style.visibility = "visible";
+        document.getElementById("icon-correct").style.display = "block";
 
         ++score;
         document.getElementById("score").innerText = "Score: " + score;
 
         locked = true;
         setTimeout(() => {
-            document.getElementById("icon-correct").style.visibility = "hidden";
+            document.getElementById("icon-correct").style.display = "none";
             userInput = 0;
             updateInputText();
             generateQuestion();
             locked = false;
         }, 2000);
     } else if (userInput.toString().length >= answer.toString().length) {
-        document.getElementById("icon-incorrect").style.visibility = "visible";
+        document.getElementById("icon-incorrect").style.display = "block";
 
         locked = true;
         setTimeout(() => {
-            document.getElementById("icon-incorrect").style.visibility = "hidden";
+            document.getElementById("icon-incorrect").style.display = "none";
             userInput = 0;
             updateInputText();
             locked = false;
@@ -218,7 +218,7 @@ window.addEventListener("load", () => {
     if (DEV_MODE) {
         for (const element of document.getElementsByClassName("dev")) {
             console.log("not in dev mode");
-            element.style.visibility = "visible";
+            element.style.display = "block";
         }
     }
 

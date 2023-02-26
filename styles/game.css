@@ -16,12 +16,12 @@ a {
 }
 
 .feedback {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
 }
 
 #icon-correct, #icon-incorrect {
-  visibility: hidden;
+  display: none;
 }
 
 .button {
@@ -138,7 +138,7 @@ h1 {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   padding: 20px;
   gap: 20px;
