@@ -15,24 +15,34 @@
 
 <body>
   <div class="container">
-    <h1>Handy Maths</h1>
-
-    <div class="topbar">
-      <div class="topbarLeft">
-        <p id="questionNo">Question 1/5</p>
-        <p id="score">Score: 0</p>
-      </div>
-      <p id="question"></p>
+    <div class="title-bar">
+      <h1 class="title"><a href="/">Handy Maths</a></h1>
     </div>
 
-    <video id="webcam"></video>
-    <canvas id="output_canvas" width="640" height="360px"></canvas>
-
-    <h1 id="selection">Your input: 0</h1>
-    <h2 id="feedback"></h2>
-
-    <p id="fingersUp" class="dev">fingers up: </p>
-    <p id="lastSelected" class="dev">last selected: </p>
+    <div class="main">
+      <div class="cols">
+        <div>
+          <video id="webcam"></video>
+          <canvas id="output_canvas" width="960px" height="540px"></canvas>
+          <p id="fingersUp" class="dev">fingers up: </p>
+          <p id="lastSelected" class="dev">last selected: </p>
+          <a class="button" href="/">Finish</a>
+        </div>
+        <div class="col-right">
+          <!-- <p id="questionNo">Question 1/5</p> -->
+          <p id="score">Score: 0</p>
+          <div class="maths-box">
+            <p id="question">5 + 3</p>
+          </div>
+          <p class="equals-sign">=</p>
+          <div class="answer-box maths-box">
+            <p id="answer">0</p>
+          </div>
+          <img class="feedback" id="icon-correct" src="../assets/icon-correct.png" />
+          <img class="feedback" id="icon-incorrect" src="../assets/icon-incorrect.png" />
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>

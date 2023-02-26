@@ -6,12 +6,18 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="styles/home.css">
 </head>
-
 <body>
+  <script>
+    function btnClickStart() {
+      var name = document.getElementById("name").value;
+      var difficulty = document.getElementById("difficulty").value;
+      window.location.href = "pages/game.html?name=" + name + "&difficulty=" + difficulty;
+    }
+  </script>
   <div class="container">
     <div class="hero-banner">
       <h1 class="title">Handy Maths</h1>
-      <p class="tagline">👾 Learn maths in a fun way ☝️ Just hold up your fingers</p>
+      <p class="tagline">👾 Learn maths in a <b>fun way</b> ☝️ Just hold up your <b>fingers</b></p>
     </div>
     <form>
       <div>
@@ -27,7 +33,8 @@
         </select>
       </div>
     </form>
-    <a class="button button-start" href="pages/game.html">Start</a>
+    <button class="button button-start" onclick="btnClickStart()">Start</button>
+    <a class="button button-start" href="pages/leaderboard.html">Leaderboard</a>
   </div>
 </body>
 </html>

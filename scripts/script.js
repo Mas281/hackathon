@@ -1,4 +1,4 @@
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 let locked = false;
 
@@ -11,12 +11,13 @@ let userInput = 0;
 const holdMillis = 1000;
 const resetMillis = 1500;
 
-let questionNo = 0;
+// let questionNo = 0;
+// const maxQuestions = 5;
+
 let question = "";
 let answer = -1;
 let score = 0;
 
-const maxQuestions = 5;
 
 function random(low, high) {
     return Math.floor(low + Math.random() * (high - low + 1));
@@ -39,8 +40,8 @@ function speak(text) {
 }
 
 function generateQuestion() {
-    ++questionNo;
-    document.getElementById("questionNo").innerText = "Question " + questionNo + "/" + maxQuestions;
+    // ++questionNo;
+    // document.getElementById("questionNo").innerText = "Question " + questionNo + "/" + maxQuestions;
 
     let lhs;
     let rhs;
@@ -85,27 +86,29 @@ function generateQuestion() {
 
 function checkUserInput() {
     if (userInput === answer) {
-        document.getElementById("feedback").style.color = "green";
-        document.getElementById("feedback").innerText = "Correct!";
+        document.getElementById("icon-correct").style.display = "block";
 
-        ++score;
+        score += 100;
         document.getElementById("score").innerText = "Score: " + score;
+
+        new Audio("../audio/correct.wav").play().then();
 
         locked = true;
         setTimeout(() => {
-            document.getElementById("feedback").innerText = "";
+            document.getElementById("icon-correct").style.display = "none";
             userInput = 0;
             updateInputText();
             generateQuestion();
             locked = false;
         }, 2000);
     } else if (userInput.toString().length >= answer.toString().length) {
-        document.getElementById("feedback").style.color = "red";
-        document.getElementById("feedback").innerText = "Incorrect :(";
+        document.getElementById("icon-incorrect").style.display = "block";
+
+        new Audio("../audio/incorrect.wav").play().then();
 
         locked = true;
         setTimeout(() => {
-            document.getElementById("feedback").innerText = "";
+            document.getElementById("icon-incorrect").style.display = "none";
             userInput = 0;
             updateInputText();
             locked = false;
@@ -140,7 +143,7 @@ function fingersUpOnHand(points) {
 }
 
 function updateInputText() {
-    document.getElementById("selection").innerText = "Your input: " + userInput;
+    document.getElementById("answer").innerText = userInput;
 }
 
 function updateFingersUp(hands) {
@@ -224,7 +227,7 @@ window.addEventListener("load", () => {
     if (DEV_MODE) {
         for (const element of document.getElementsByClassName("dev")) {
             console.log("not in dev mode");
-            element.style.visibility = "visible";
+            element.style.display = "block";
         }
     }
 
