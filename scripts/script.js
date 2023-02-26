@@ -2,13 +2,14 @@ const DEV_MODE = false;
 
 let locked = false;
 
+let prevDigit = -1;
 let lastFingersUp = -1;
 let lastFingersUpTime = -1;
 
 let userInput = 0;
 
 const holdMillis = 1000;
-const resetMillis = 1000;
+const resetMillis = 1500;
 
 let questionNo = 0;
 let question = "";
@@ -155,14 +156,16 @@ function updateFingersUp(hands) {
             userInput = 0;
             lastFingersUp = -1;
             lastFingersUpTime = Date.now();
-        } else if (fingersUp !== 10 && elapsed >= holdMillis) {
+            prevDigit = -1;
+            updateInputText();
+        } else if (fingersUp !== 10 && elapsed >= (fingersUp === prevDigit ? 2 * holdMillis : holdMillis)) {
             document.getElementById("lastSelected").innerText = "last selected: " + fingersUp;
             lastFingersUpTime = Date.now();
             userInput = 10 * userInput + fingersUp;
+            prevDigit = fingersUp;
+            updateInputText();
+            checkUserInput();
         }
-
-        updateInputText();
-        checkUserInput();
     } else {
         lastFingersUp = fingersUp;
         lastFingersUpTime = Date.now();
@@ -195,8 +198,6 @@ function onResults(results) {
                 drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
             }
         }
-    } else {
-        lastFingersUp = -1;
     }
 
     canvasCtx.restore();
