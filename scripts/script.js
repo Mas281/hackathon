@@ -29,7 +29,12 @@ function speak(text) {
     speakData.pitch = 1;
     speakData.text = text;
     speakData.lang = "en";
-    speakData.voice = window.speechSynthesis.getVoices()[13];
+    for (const voice of window.speechSynthesis.getVoices()) {
+        if (voice.name === "Eddy (English (UK))") {
+            speakData.voice = voice;
+            break;
+        }
+    }
     speechSynthesis.speak(speakData);
 }
 
