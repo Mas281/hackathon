@@ -91,6 +91,8 @@ function checkUserInput() {
         ++score;
         document.getElementById("score").innerText = "Score: " + score;
 
+        new Audio("../audio/correct.wav").play().then();
+
         locked = true;
         setTimeout(() => {
             document.getElementById("feedback").innerText = "";
@@ -102,6 +104,8 @@ function checkUserInput() {
     } else if (userInput.toString().length >= answer.toString().length) {
         document.getElementById("feedback").style.color = "red";
         document.getElementById("feedback").innerText = "Incorrect :(";
+
+        new Audio("../audio/incorrect.wav").play().then();
 
         locked = true;
         setTimeout(() => {
