@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-  <title>Hackathon</title>
+  <title>Handy Maths</title>
 
   <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/home.css">
 </head>
 
 <body>
   <div class="container">
-    <h1>hello</h1>
-    <p>this is the home page</p>
-    <a href="pages/game.html">go to game</a>
+    <div class="hero-banner">
+      <h1 class="title">Handy Maths</h1>
+      <p class="tagline">👾 Learn maths in a fun way ☝️ Just hold up your fingers</p>
+    </div>
+    <form>
+      <div>
+        <label for="name">Enter your name:</label>
+        <input id="name" placeholder="Bob" />
+      </div>
+      <div>
+        <label for="difficulty">Choose your difficulty:</label>
+        <select id="difficulty" name="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+    </form>
+    <a class="button button-start" href="pages/game.html">Start</a>
   </div>
 </body>
 </html>

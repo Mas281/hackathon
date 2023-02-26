@@ -28,6 +28,7 @@ function speak(text) {
     speakData.pitch = 1;
     speakData.text = text;
     speakData.lang = "en";
+    speakData.voice = window.speechSynthesis.getVoices()[13];
     speechSynthesis.speak(speakData);
 }
 
