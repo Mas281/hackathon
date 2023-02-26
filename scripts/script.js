@@ -30,7 +30,12 @@ function speak(text) {
     speakData.pitch = 1;
     speakData.text = text;
     speakData.lang = "en";
-    speakData.voice = window.speechSynthesis.getVoices()[13];
+    for (const voice of window.speechSynthesis.getVoices()) {
+        if (voice.name === "Eddy (English (UK))") {
+            speakData.voice = voice;
+            break;
+        }
+    }
     speechSynthesis.speak(speakData);
 }
 
@@ -86,6 +91,8 @@ function checkUserInput() {
         score += 100;
         document.getElementById("score").innerText = "Score: " + score;
 
+        new Audio("../audio/correct.wav").play().then();
+
         locked = true;
         setTimeout(() => {
             document.getElementById("icon-correct").style.display = "none";
@@ -96,6 +103,8 @@ function checkUserInput() {
         }, 2000);
     } else if (userInput.toString().length >= answer.toString().length) {
         document.getElementById("icon-incorrect").style.display = "block";
+
+        new Audio("../audio/incorrect.wav").play().then();
 
         locked = true;
         setTimeout(() => {
