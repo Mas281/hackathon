@@ -4,19 +4,25 @@
 }
 
 table, tr {
-    align-items: center;
     text-align: center;
-    margin: 0px auto;
-  }
+    margin-top:50px; 
+    margin-left:200px; 
 
-th, td {
+}
+
+td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
+    border-bottom: 1px solid #18befa;
+}
+th {
+    padding: 8px;
+    text-align: center;
     border-bottom: 1px solid #18befa;
 }
 
 .score {
-    justify-content: end;
+    text-align: end;
 }
 
 body {
@@ -43,6 +49,7 @@ body {
     min-height: 100vh;
     background-color: #365289;
     text-align: center;
+
 }
 
 .button {
