@@ -5,6 +5,11 @@
   overflow: hidden;
 }
 
+body {
+  background: #403289;
+  color: #fff;
+}
+
 .container {
   border: 4px purple solid;
 }

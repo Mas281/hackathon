@@ -2,13 +2,14 @@ const DEV_MODE = false;
 
 let locked = false;
 
+let prevDigit = -1;
 let lastFingersUp = -1;
 let lastFingersUpTime = -1;
 
 let userInput = 0;
 
 const holdMillis = 1000;
-const resetMillis = 3000;
+const resetMillis = 1500;
 
 let questionNo = 0;
 let question = "";
@@ -28,6 +29,7 @@ function speak(text) {
     speakData.pitch = 1;
     speakData.text = text;
     speakData.lang = "en";
+    speakData.voice = window.speechSynthesis.getVoices()[13];
     speechSynthesis.speak(speakData);
 }
 
@@ -77,11 +79,7 @@ function generateQuestion() {
 }
 
 function checkUserInput() {
-    console.log("userinput: " + userInput, typeof(userInput));
-    console.log("answer: " + answer, typeof(answer));
-
     if (userInput === answer) {
-        console.log("GOT CORRECT");
         document.getElementById("feedback").style.color = "green";
         document.getElementById("feedback").innerText = "Correct!";
 
@@ -158,14 +156,16 @@ function updateFingersUp(hands) {
             userInput = 0;
             lastFingersUp = -1;
             lastFingersUpTime = Date.now();
-        } else if (fingersUp !== 10 && elapsed >= holdMillis) {
+            prevDigit = -1;
+            updateInputText();
+        } else if (fingersUp !== 10 && elapsed >= (fingersUp === prevDigit ? 2 * holdMillis : holdMillis)) {
             document.getElementById("lastSelected").innerText = "last selected: " + fingersUp;
             lastFingersUpTime = Date.now();
             userInput = 10 * userInput + fingersUp;
+            prevDigit = fingersUp;
+            updateInputText();
+            checkUserInput();
         }
-
-        updateInputText();
-        checkUserInput();
     } else {
         lastFingersUp = fingersUp;
         lastFingersUpTime = Date.now();
@@ -181,11 +181,11 @@ let canvasCtx;
 function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
 
-    // canvasCtx.scale(-1, 1);
-    // canvasCtx.drawImage(results.image, -image.width, 0);
-    // canvasCtx.setTransform(1, 0, 0, 1, 0, 0);
+    if (!DEV_MODE) {
+        canvasCtx.scale(-1, 1);
+    }
+    canvasCtx.drawImage(results.image, 0, 0, (DEV_MODE ? 1 : -1) * canvasElement.width, canvasElement.height);
 
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         if (!locked) {
@@ -200,7 +200,6 @@ function onResults(results) {
         }
     }
 
-    canvasCtx.scale(-1, 1);
     canvasCtx.restore();
 }
 
