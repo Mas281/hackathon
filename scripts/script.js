@@ -83,7 +83,7 @@ function checkUserInput() {
     if (userInput === answer) {
         document.getElementById("icon-correct").style.display = "block";
 
-        ++score;
+        score += 100;
         document.getElementById("score").innerText = "Score: " + score;
 
         locked = true;
