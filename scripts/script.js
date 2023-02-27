@@ -88,7 +88,7 @@ function checkUserInput() {
     if (userInput === answer) {
         document.getElementById("icon-correct").style.display = "block";
 
-        score += 100;
+        score++;
         document.getElementById("score").innerText = "Score: " + score;
 
         new Audio("../audio/correct.wav").play().then();
@@ -206,6 +206,9 @@ function onResults(results) {
                 drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
             }
         }
+    } else {
+        lastFingersUp = -1;
+        lastFingersUpTime = Date.now();
     }
 
     canvasCtx.restore();
