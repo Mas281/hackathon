@@ -9,8 +9,8 @@ from sklearn.metrics import classification_report,confusion_matrix
 from keras.callbacks import ReduceLROnPlateau
 import pandas as pd
 
-train_df = pd.read_csv("data/sign_mnist_train.csv")
-test_df = pd.read_csv("data/sign_mnist_test.csv")
+train_df = pd.read_csv("../data/sign_mnist_train.csv")
+test_df = pd.read_csv("../data/sign_mnist_test.csv")
 
 y_train = train_df['label']
 y_test = test_df['label']

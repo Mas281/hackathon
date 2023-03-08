@@ -1,5 +1,5 @@
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
 import cv2
 import mediapipe as mp
@@ -8,7 +8,7 @@ import numpy as np
 import time
 import pandas as pd
 
-model = load_model('smnist.h5')
+model = load_model('../machineLearning/smnist.h5')
 
 mphands = mp.solutions.hands
 hands = mphands.Hands()
