@@ -9,3 +9,9 @@ A game designed for children who have difficulty writing. Answer maths questions
 - Clone and open the index.html file.
 - Or go to https://mas281.github.io/hackathon/
 - That's it.
+
+## *Secret Sign Language*
+
+- Run main.py under machineLearning
+- Open the LocalHost provided in the command line
+
