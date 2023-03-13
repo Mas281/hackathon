@@ -1,0 +1,154 @@
+@font-face {
+    font-family: 'Fortnite';
+    src: url('../../assets/fonts/burbankbigcondensed-black.woff2') format('woff2'),
+         url('../../assets/fonts/burbankbigcondensed-black.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  background: #365289;
+  color: #F2F3ED;
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+  font-size: 40px;
+  padding: 20px;
+  text-align: center;
+  font-family: "Fortnite", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+a {
+  color: #F2F3ED;
+  text-decoration: none;
+}
+
+.feedback {
+  width: 200px;
+  height: 200px;
+}
+
+#icon-correct, #icon-incorrect {
+  display: none;
+}
+
+.button {
+    display: block;
+    background-color: #5792C9;
+    color: white;
+    border: none;
+    border-radius: 60px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 4px 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 40px;
+}
+
+.main {
+  padding: 40px;
+}
+
+.title-bar {
+  background: #5792C9;
+  color: #F2F3ED;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+}
+
+video {
+  position: absolute;
+  visibility: hidden;
+}
+
+#output_canvas {
+  display: block;
+  /* margin: 40px auto; */
+}
+
+#selection {
+  text-align: center;
+}
+
+#feedback {
+  text-align: center;
+}
+
+.dev {
+  visibility: hidden;
+}
+
+.topbar {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.cols {
+  display: flex;
+  flex-direction: row;
+}
+
+#questionNo {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#score {
+  font-size: 60px;
+  /* font-style: italic; */
+}
+
+.maths-box {
+  padding: 30px;
+  width: 300px;
+  background-color: #F2F3ED;
+  color: #365289;
+  border-radius: 30px;
+  text-align: center;
+}
+
+.answer-box {
+  background-color: #f0d850;
+  color: #6e4008;
+}
+
+.equals-sign {
+  font-size: 60px;
+}
+
+#question, #answer {
+  font-size: 60px;
+  /* color: #365289; */
+}
+
+.webcam {
+  display: block;
+  width: 640px;
+  height: 360px;
+}
+
+.col-right {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
